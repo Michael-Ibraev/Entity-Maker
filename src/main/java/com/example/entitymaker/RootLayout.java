@@ -52,6 +52,7 @@ public class RootLayout extends AnchorPane{
             icn.setType(DragIconType.values()[i]);
             left_pane.getChildren().add(icn);
         }
+        buildDragHandlers();
     }
 
     private void addDragDetection(DragIcon dragIcon){
@@ -60,6 +61,7 @@ public class RootLayout extends AnchorPane{
             public void handle(MouseEvent event) {
                 base_pane.setOnDragOver(mIconDragOverRoot);
                 right_pane.setOnDragOver(mIconDragOverRightPane);
+                right_pane.setOnDragDropped(mIconDragDropped);
 
                 DragIcon icn = (DragIcon) event.getSource();
 
@@ -67,7 +69,10 @@ public class RootLayout extends AnchorPane{
                 mDragOverIcon.relocateToPoint(new Point2D(event.getSceneX(), event.getSceneY()));
 
                 ClipboardContent content = new ClipboardContent();
-                content.putString(icn.getType().toString());
+                DragContainer container = new DragContainer();
+
+                container.addData("type", mDragOverIcon.getType().toString());
+                content.put(DragContainer.AddNode, container);
 
                 mDragOverIcon.startDragAndDrop(TransferMode.ANY).setContent(content);
                 mDragOverIcon.setVisible(true);
@@ -102,21 +107,22 @@ public class RootLayout extends AnchorPane{
             }
         };
 
-        mIconDragDropped = new EventHandler <DragEvent>(){
+        mIconDragDropped = new EventHandler <DragEvent> (){
             @Override
             public void handle(DragEvent event){
+                DragContainer container = (DragContainer) event.getDragboard().getContent(DragContainer.AddNode);
+
+                container.addData("scene_coords", new Point2D(event.getSceneX(), event.getSceneY()));
+
+                ClipboardContent content = new ClipboardContent();
+                content.put(DragContainer.AddNode, container);
+
+                event.getDragboard().setContent(content);
                 event.setDropCompleted(true);
-
-                right_pane.removeEventHandler(DragEvent.DRAG_OVER, mIconDragOverRightPane);
-                right_pane.removeEventHandler(DragEvent.DRAG_DROPPED, mIconDragDropped);
-                base_pane.removeEventHandler(DragEvent.DRAG_OVER, mIconDragOverRoot);
-
-                mDragOverIcon.setVisible(false);
-                event.consume();
             }
         };
 
-        this.setOnDragDone(new EventHandler<DragEvent>() {
+        this.setOnDragDone(new EventHandler <DragEvent> () {
             @Override
             public void handle(DragEvent event) {
                 right_pane.removeEventHandler(DragEvent.DRAG_OVER, mIconDragOverRightPane);
@@ -124,6 +130,23 @@ public class RootLayout extends AnchorPane{
                 base_pane.removeEventHandler(DragEvent.DRAG_OVER, mIconDragOverRoot);
 
                 mDragOverIcon.setVisible(false);
+
+                DragContainer container = (DragContainer) event.getDragboard().getContent(DragContainer.AddNode);
+
+                if(container != null){
+                    if(container.getValue("scene_coords") != null){
+
+                        DragIcon droppedIcon = new DragIcon();
+
+                        droppedIcon.setType(DragIconType.valueOf(container.getValue("type")));
+                        right_pane.getChildren().add(droppedIcon);
+
+                        Point2D cursorPoint = container.getValue("scene_coords");
+                        droppedIcon.relocateToPoint(
+                                new Point2D(cursorPoint.getX() - 32, cursorPoint.getY() - 32)
+                        );
+                    }
+                }
                 event.consume();
             }
         });
