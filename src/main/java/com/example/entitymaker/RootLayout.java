@@ -136,19 +136,26 @@ public class RootLayout extends AnchorPane{
                 if(container != null){
                     if(container.getValue("scene_coords") != null){
 
-                        DragIcon droppedIcon = new DragIcon();
+                        DraggableNode node = new DraggableNode();
 
-                        droppedIcon.setType(DragIconType.valueOf(container.getValue("type")));
-                        right_pane.getChildren().add(droppedIcon);
+                        node.setType(DragIconType.valueOf(container.getValue("type")));
+                        right_pane.getChildren().add(node);
 
                         Point2D cursorPoint = container.getValue("scene_coords");
-                        droppedIcon.relocateToPoint(
+                        node.relocateToPoint(
                                 new Point2D(cursorPoint.getX() - 32, cursorPoint.getY() - 32)
                         );
                     }
                 }
+
+                container = (DragContainer) event.getDragboard().getContent(DragContainer.DragNode);
+                if (container != null) {
+                    if (container.getValue("type") != null)
+                        System.out.println ("Moved node " + container.getValue("type"));
+                }
                 event.consume();
             }
         });
+
     }
 }

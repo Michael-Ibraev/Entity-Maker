@@ -13,7 +13,6 @@ public class DragContainer implements Serializable {
     private static final long serialVersionUID = -1890998765646621338L;
     public static final DataFormat AddNode =
             new DataFormat("application.DragIcon.add");
-
     public static final DataFormat DragNode =
             new DataFormat("application.DraggableNode.drag");
     private final List <Pair<String, Object>>mDataPairs = new ArrayList<Pair<String, Object> >();
