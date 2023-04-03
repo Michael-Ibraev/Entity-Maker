@@ -3,6 +3,7 @@ package com.example.entitymaker;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
@@ -148,10 +149,36 @@ public class RootLayout extends AnchorPane{
                     }
                 }
 
-                container = (DragContainer) event.getDragboard().getContent(DragContainer.DragNode);
-                if (container != null) {
-                    if (container.getValue("type") != null)
-                        System.out.println ("Moved node " + container.getValue("type"));
+//                container = (DragContainer) event.getDragboard().getContent(DragContainer.DragNode);
+//                if (container != null) {
+//                    if (container.getValue("type") != null)
+//                        System.out.println ("Moved node " + container.getValue("type"));
+//                }
+                container = (DragContainer) event.getDragboard().getContent(DragContainer.AddLink);
+                if(container != null){
+                    String sourceId = container.getValue("source");
+                    String targetId = container.getValue("target");
+
+                    if (sourceId != null && targetId != null){
+                        NodeLink link = new NodeLink();
+
+                        right_pane.getChildren().add(0, link);
+
+                        DraggableNode source = null;
+                        DraggableNode target = null;
+
+                        for(Node n: right_pane.getChildren()){
+                            if(n.getId() == null)
+                                continue;
+                            if(n.getId().equals(sourceId))
+                                source = (DraggableNode) n;
+                            if(n.getId().equals(targetId))
+                                target = (DraggableNode) n;
+                        }
+                        if (source != null && target != null)
+                            link.bindEnds(source, target);
+                    }
+
                 }
                 event.consume();
             }

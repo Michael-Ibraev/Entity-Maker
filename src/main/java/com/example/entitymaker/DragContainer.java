@@ -9,7 +9,8 @@ import java.util.List;
 
 public class DragContainer implements Serializable {
 
-
+    public static final DataFormat AddLink =
+            new DataFormat("application.NodeLink.add");
     private static final long serialVersionUID = -1890998765646621338L;
     public static final DataFormat AddNode =
             new DataFormat("application.DragIcon.add");
