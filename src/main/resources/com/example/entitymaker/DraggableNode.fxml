@@ -5,44 +5,51 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<fx:root fx:id="root_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="96.0" prefWidth="80.0" styleClass="dragicon" stylesheets="@application.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="root_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="190.0" prefWidth="150.0" styleClass="dragicon" stylesheets="@application.css" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <GridPane styleClass="node-overlay">
+            <GridPane alignment="TOP_CENTER" prefHeight="70.0" styleClass="node-overlay">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="25.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="132.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="31.0" minWidth="10.0" prefWidth="18.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="close_button" text="X" GridPane.columnIndex="1">
+                  <Label fx:id="title_bar" prefHeight="16.0" prefWidth="126.0" text="Table" />
+                  <Label fx:id="close_button" prefHeight="16.0" prefWidth="26.0" text="X" GridPane.columnIndex="1">
                      <padding>
                         <Insets right="10.0" />
                      </padding>
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
                   </Label>
-                  <Label fx:id="title_bar" text="Label">
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding></Label>
                </children>
             </GridPane>
-            <HBox maxWidth="-Infinity" minHeight="-Infinity" prefHeight="66.0" prefWidth="200.0">
+            <AnchorPane fx:id="node_body" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="110.0">
                <children>
-                  <AnchorPane fx:id="left_link_handle" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="25.0" styleClass="left-link-handle" />
-                  <AnchorPane fx:id="node_body" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="30.0" />
-                  <AnchorPane fx:id="right_link_handle" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="25.0" styleClass="right-link-handle" />
-               </children>
-            </HBox>
+                  <GridPane fx:id="table_grid">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.0" minWidth="10.0" prefWidth="75.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="151.0" minWidth="10.0" prefWidth="75.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+               </children></AnchorPane>
          </children>
       </VBox>
    </children>

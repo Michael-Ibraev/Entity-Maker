@@ -23,8 +23,7 @@ import java.util.UUID;
 
 public class DraggableNode extends AnchorPane {
 
-    @FXML AnchorPane left_link_handle;
-    @FXML AnchorPane right_link_handle;
+    @FXML AnchorPane node_body;
 
     private final List mLinkIds = new ArrayList();
     private NodeLink mDragLink = null;
@@ -61,14 +60,16 @@ public class DraggableNode extends AnchorPane {
     }
     @FXML
     private  void initialize(){
+        root_pane.isResizable();
+
         buildNodeDragHandlers();
         buildLinkHandlers();
 
-        left_link_handle.setOnDragDetected(mLinkHandlerDragDetected);
-        right_link_handle.setOnDragDetected(mLinkHandlerDragDetected);
+        node_body.setOnDragDetected(mLinkHandlerDragDetected);
+        node_body.setOnDragDetected(mLinkHandlerDragDetected);
 
-        left_link_handle.setOnDragDropped(mLinkHandleDragDropped);
-        right_link_handle.setOnDragDropped(mLinkHandleDragDropped);
+        node_body.setOnDragDropped(mLinkHandleDragDropped);
+        node_body.setOnDragDropped(mLinkHandleDragDropped);
 
         mDragLink = new NodeLink();
         mDragLink.setVisible(false);
@@ -253,7 +254,7 @@ public class DraggableNode extends AnchorPane {
                 right_pane.getChildren().remove(0);
 
                 AnchorPane link_handle = (AnchorPane) event.getSource();
-               /**/DraggableNode parent = (DraggableNode) link_handle.getParent().getParent().getParent();
+               /**/DraggableNode parent = (DraggableNode) link_handle.getParent().getParent();
 
                 ClipboardContent content = new ClipboardContent();
 

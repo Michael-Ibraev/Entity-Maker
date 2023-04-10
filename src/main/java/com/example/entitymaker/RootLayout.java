@@ -44,15 +44,11 @@ public class RootLayout extends AnchorPane{
         mDragOverIcon.setVisible(false);
         mDragOverIcon.setOpacity(0.65);
         getChildren().add(mDragOverIcon);
+        DragIcon icn = new DragIcon();
+        addDragDetection(icn);
+        icn.setType(DragIconType.values()[6]);
+        left_pane.getChildren().add(icn);
 
-        for (int i = 0; i < 7; i++){
-            DragIcon icn = new DragIcon();
-
-            addDragDetection(icn);
-
-            icn.setType(DragIconType.values()[i]);
-            left_pane.getChildren().add(icn);
-        }
         buildDragHandlers();
     }
 

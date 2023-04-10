@@ -40,38 +40,7 @@ public class DragIcon extends AnchorPane {
 
         getStyleClass().clear();
         getStyleClass().add("dragicon");
-        switch (mType){
+        getStyleClass().add("icon-grey");
 
-            case blue:
-                getStyleClass().add("icon-blue");
-            break;
-
-            case red:
-                getStyleClass().add("icon-red");
-            break;
-
-            case green:
-                getStyleClass().add("icon-green");
-            break;
-
-            case grey:
-                getStyleClass().add("icon-grey");
-            break;
-
-            case purple:
-                getStyleClass().add("icon-purple");
-            break;
-
-            case yellow:
-                getStyleClass().add("icon-yellow");
-            break;
-
-            case black:
-                getStyleClass().add("icon-black");
-            break;
-
-            default:
-            break;
-        }
     }
 }
