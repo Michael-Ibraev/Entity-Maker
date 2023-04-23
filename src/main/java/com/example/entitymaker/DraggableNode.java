@@ -8,7 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
@@ -41,6 +43,9 @@ public class DraggableNode extends AnchorPane {
     private Point2D mDragOffset = new Point2D(0.0, 0.0);
     @FXML private Label title_bar;
     @FXML private Label close_button;
+    @FXML private TextField table_name;
+    @FXML private Button submit_button;
+
     private final DraggableNode self;
     public DraggableNode(){
         setId(UUID.randomUUID().toString());
@@ -135,6 +140,7 @@ public class DraggableNode extends AnchorPane {
         title_bar.setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+
                 getParent().setOnDragOver(null);
                 getParent().setOnDragDropped(null);
 
@@ -159,6 +165,7 @@ public class DraggableNode extends AnchorPane {
         mContextDragOver = new EventHandler <DragEvent> () {
             @Override
             public void handle(DragEvent event) {
+
                 event.acceptTransferModes(TransferMode.ANY);
                 relocateToPoint(new Point2D(event.getSceneX(), event.getSceneY()));
                 event.consume();
@@ -195,6 +202,15 @@ public class DraggableNode extends AnchorPane {
                     }
                     iterId.remove();
                 }
+            }
+        });
+
+        title_bar.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println(getId());
+                System.out.println(self.title_bar.getText());
+                RootLayout.table_name.setText(title_bar.getText());
             }
         });
     }

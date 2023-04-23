@@ -4,7 +4,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextField;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
@@ -21,8 +23,11 @@ public class RootLayout extends AnchorPane{
     @FXML SplitPane base_pane;
     @FXML AnchorPane right_pane;
     @FXML VBox left_pane;
+
+    public static @FXML TextField table_name;
     private DragIcon mDragOverIcon = null;
     public RootLayout(){
+
         FXMLLoader fxmlLoader = new FXMLLoader(
                 getClass().getResource("RootLayout.fxml")
         );
