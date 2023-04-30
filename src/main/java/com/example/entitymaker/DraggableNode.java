@@ -11,11 +11,14 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,11 +44,11 @@ public class DraggableNode extends AnchorPane {
     private DragIconType mType = null;
 
     private Point2D mDragOffset = new Point2D(0.0, 0.0);
-    @FXML private Label title_bar;
+    @FXML ImageView reload_img;
+    @FXML public Label title_bar;
     @FXML private Label close_button;
-    @FXML private TextField table_name;
-    @FXML private Button submit_button;
-
+    @FXML public TextField table_name;
+    @FXML public Button submit_button;
     private final DraggableNode self;
     public DraggableNode(){
         setId(UUID.randomUUID().toString());
@@ -62,9 +65,10 @@ public class DraggableNode extends AnchorPane {
         }catch (IOException exception){
             throw  new RuntimeException(exception);
         }
+
     }
     @FXML
-    private  void initialize(){
+    private void initialize(){
         root_pane.isResizable();
 
         buildNodeDragHandlers();
@@ -86,6 +90,8 @@ public class DraggableNode extends AnchorPane {
                 right_pane = (AnchorPane) getParent();
             }
         });
+
+        reload_img.setImage(new Image("reload.png"));
 
     }
     public void relocateToPoint(Point2D p){
@@ -204,15 +210,21 @@ public class DraggableNode extends AnchorPane {
                 }
             }
         });
-
         title_bar.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.out.println(getId());
-                System.out.println(self.title_bar.getText());
-                RootLayout.table_name.setText(title_bar.getText());
+                TableEditor.tableName = title_bar.getText();
             }
         });
+        reload_img.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                title_bar.setText(TableEditor.tableName);
+            }
+        });
+
+
+
     }
 
     private void buildLinkHandlers(){

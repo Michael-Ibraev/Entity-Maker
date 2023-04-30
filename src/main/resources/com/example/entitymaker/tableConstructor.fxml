@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="525.0" prefWidth="525.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.entitymaker.TableConstructor">
+   <children>
+      <TableView fx:id="tableView" layoutX="7.0" layoutY="7.0" prefHeight="380.0" prefWidth="511.0">
+        <columns>
+          <TableColumn fx:id="title_column" onEditCommit="#onEditChanged" prefWidth="160.0" text="Title" />
+          <TableColumn fx:id="type_column" minWidth="0.0" prefWidth="176.0" text="Data Type" />
+            <TableColumn fx:id="pk_column" prefWidth="50.0" text="PK" />
+            <TableColumn fx:id="nn_column" prefWidth="65.0" text="NN" />
+            <TableColumn fx:id="ai_column" prefWidth="58.0" text="AI" />
+        </columns>
+      </TableView>
+      <Button fx:id="submit_btn" layoutX="446.0" layoutY="487.0" mnemonicParsing="false" text="Submit" />
+      <Button fx:id="add_btn" layoutX="14.0" layoutY="487.0" mnemonicParsing="false" onAction="#addRow" text="Add Row" />
+      <Button fx:id="delete_btn" layoutX="103.0" layoutY="487.0" mnemonicParsing="false" onAction="#deleteRow" text="Delete Row" />
+      <TextField fx:id="title_field" layoutX="14.0" layoutY="427.0" prefHeight="24.0" prefWidth="160.0" promptText="Title" />
+      <ComboBox fx:id="type_comboBox" layoutX="188.0" layoutY="427.0" prefWidth="150.0" promptText="Data Type" />
+      <CheckBox fx:id="pk_check" layoutX="359.0" layoutY="430.0" mnemonicParsing="false" text="PK" />
+      <CheckBox fx:id="ai_check" layoutX="469.0" layoutY="430.0" mnemonicParsing="false" text="AI" />
+      <CheckBox fx:id="nn_check" layoutX="410.0" layoutY="430.0" mnemonicParsing="false" text="NN" />
+   </children>
+</AnchorPane>

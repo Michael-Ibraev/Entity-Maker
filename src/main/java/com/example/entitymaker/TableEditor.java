@@ -8,12 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 public class TableEditor {
-    @FXML
-    AnchorPane root_pane;
-    @FXML
-    GridPane table_grid;
-    @FXML
-    GridPane grid_pane;
+    public static String tableName;
 
 
 }

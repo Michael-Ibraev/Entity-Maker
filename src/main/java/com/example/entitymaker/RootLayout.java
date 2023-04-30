@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.ClipboardContent;
@@ -14,27 +16,32 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
+import java.util.Objects;
+
 import javafx.geometry.Point2D;
+import javafx.stage.Stage;
 
 public class RootLayout extends AnchorPane{
     private EventHandler mIconDragOverRoot = null;
+    private EventHandler update = null;
     private EventHandler mIconDragDropped = null;
     private EventHandler mIconDragOverRightPane = null;
     @FXML SplitPane base_pane;
+    @FXML SplitPane editor_pane;
     @FXML AnchorPane right_pane;
     @FXML VBox left_pane;
-
-    public static @FXML TextField table_name;
+    @FXML Button refresh_button;
+    @FXML Button submit_button;
+    @FXML TextField table_name;
+    @FXML Button edit_button;
     private DragIcon mDragOverIcon = null;
     public RootLayout(){
 
         FXMLLoader fxmlLoader = new FXMLLoader(
                 getClass().getResource("RootLayout.fxml")
         );
-
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
         try{
             fxmlLoader.load();
         } catch (IOException exception){
@@ -55,6 +62,7 @@ public class RootLayout extends AnchorPane{
         left_pane.getChildren().add(icn);
 
         buildDragHandlers();
+        dataUpdate();
     }
 
     private void addDragDetection(DragIcon dragIcon){
@@ -150,11 +158,6 @@ public class RootLayout extends AnchorPane{
                     }
                 }
 
-//                container = (DragContainer) event.getDragboard().getContent(DragContainer.DragNode);
-//                if (container != null) {
-//                    if (container.getValue("type") != null)
-//                        System.out.println ("Moved node " + container.getValue("type"));
-//                }
                 container = (DragContainer) event.getDragboard().getContent(DragContainer.AddLink);
                 if(container != null){
                     String sourceId = container.getValue("source");
@@ -184,6 +187,31 @@ public class RootLayout extends AnchorPane{
                 event.consume();
             }
         });
+    }
 
+
+    public void dataUpdate(){
+        refresh_button.setOnMouseClicked(new EventHandler <MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                table_name.setText(TableEditor.tableName);
+            }
+        });
+        submit_button.setOnMouseClicked(new EventHandler <MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event) {
+                TableEditor.tableName = table_name.getText();
+            }
+        });
+    }
+
+    public void toTableConstructor() throws IOException {
+        Stage tableConstructor = new Stage();
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("tableConstructor.fxml")));
+        tableConstructor.setTitle("Table Constructor");
+        tableConstructor.setScene(new Scene(parent, 525, 525));
+        tableConstructor.setResizable(false);
+        tableConstructor.show();
     }
 }
+
