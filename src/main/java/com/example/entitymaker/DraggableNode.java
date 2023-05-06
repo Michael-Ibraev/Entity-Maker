@@ -2,15 +2,16 @@ package com.example.entitymaker;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
@@ -43,6 +44,10 @@ public class DraggableNode extends AnchorPane {
     private EventHandler mContextDragDropped;
     private DragIconType mType = null;
 
+    public TableView<ShortTable> tableViewShort;
+    public TableColumn<Table, String> title_c;
+    public TableColumn<Table, String> pk_c;
+
     private Point2D mDragOffset = new Point2D(0.0, 0.0);
     @FXML ImageView reload_img;
     @FXML public Label title_bar;
@@ -65,6 +70,18 @@ public class DraggableNode extends AnchorPane {
         }catch (IOException exception){
             throw  new RuntimeException(exception);
         }
+
+        ObservableList<ShortTable> tables = FXCollections.observableArrayList(
+                new ShortTable("test1", "pk"),
+                new ShortTable("test2", " "),
+                new ShortTable("test3", " ")
+
+        );
+
+        tableViewShort.setItems(tables);
+
+        title_c.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        pk_c.setCellValueFactory(new PropertyValueFactory<>("PK"));
 
     }
     @FXML

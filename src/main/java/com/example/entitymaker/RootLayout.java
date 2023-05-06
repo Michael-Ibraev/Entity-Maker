@@ -209,7 +209,7 @@ public class RootLayout extends AnchorPane{
         Stage tableConstructor = new Stage();
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("tableConstructor.fxml")));
         tableConstructor.setTitle("Table Constructor");
-        tableConstructor.setScene(new Scene(parent, 525, 525));
+        tableConstructor.setScene(new Scene(parent, 525, 450));
         tableConstructor.setResizable(false);
         tableConstructor.show();
     }
