@@ -59,26 +59,47 @@ public class TableConstructor implements Initializable{
             arrList.add(new ArrayList<>());
             arrList.get(i).add(table.getTitle());
             arrList.get(i).add(table.getType().getValue().toString());
-            arrList.get(i).add(getCheckBoxValue(table.getPk()));
-            arrList.get(i).add(getCheckBoxValue(table.getNn()));
-            arrList.get(i).add(getCheckBoxValue(table.getAi()));
+            arrList.get(i).add(getPkValue(table.getPk()));
+            arrList.get(i).add(getAiValue(table.getNn()));
+            arrList.get(i).add(getNnValue(table.getAi()));
 
         }
+        String[][] arr = new String[arrList.size()][5];
 
         for(int i = 0; i < arrList.size(); i++){
             for(int j = 0; j < arrList.get(i).size(); j++){
                 System.out.println(arrList.get(i).get(j));
+                arr[i][j] = arrList.get(i).get(j);
             }
             System.out.println("-----------------------");
         }
-
+        TableEditor.columnMap.put(TableEditor.tableId, arr);
     }
-    public String getCheckBoxValue(CheckBox checkBox){
+
+    public String getPkValue(CheckBox checkBox){
         String state;
         if(checkBox.isSelected()){
-            state = "true";
+            state = "PK";
         } else {
-            state = "false";
+            state = "";
+        }
+        return state;
+    }
+    public String getNnValue(CheckBox checkBox){
+        String state;
+        if(checkBox.isSelected()){
+            state = "NN";
+        } else {
+            state = "";
+        }
+        return state;
+    }
+    public String getAiValue(CheckBox checkBox){
+        String state;
+        if(checkBox.isSelected()){
+            state = "AI";
+        } else {
+            state = "";
         }
         return state;
     }

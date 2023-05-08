@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class TableEditor {
     public static Map<String, String> nameMap = new HashMap<String, String>();
-    public static Map<String, String[]> columnMap = new HashMap<String, String[]>();
+    public static Map<String, String[][]> columnMap = new HashMap<String, String[][]>();
     public static String tableId;
     public static String tableName;
     public static String Title;

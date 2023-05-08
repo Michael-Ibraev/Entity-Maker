@@ -58,6 +58,7 @@ public class DraggableNode extends AnchorPane {
     public DraggableNode(){
         setId(UUID.randomUUID().toString());
         TableEditor.nameMap.put(getId(), "Table");
+        TableEditor.columnMap.put(getId(), new String[][]{});
 
         System.out.println(TableEditor.nameMap.keySet());
         System.out.println(TableEditor.nameMap.values());
@@ -75,21 +76,8 @@ public class DraggableNode extends AnchorPane {
         }catch (IOException exception){
             throw  new RuntimeException(exception);
         }
-
-        title_c.setCellValueFactory(new PropertyValueFactory<>("Title"));
-        pk_c.setCellValueFactory(new PropertyValueFactory<>("Pk"));
-
-        ObservableList<ShortTable> tables = FXCollections.observableArrayList(
-                new ShortTable("test1", "pk1"),
-                new ShortTable("test2", "pk2"),
-                new ShortTable("test3", "pk3")
-
-        );
-        tableViewShort.setItems(tables);
-
-
-
     }
+
     @FXML
     private void initialize(){
         root_pane.isResizable();
@@ -243,11 +231,19 @@ public class DraggableNode extends AnchorPane {
             @Override
             public void handle(MouseEvent event) {
                 title_bar.setText(TableEditor.nameMap.get(getId()));
+
+                title_c.setCellValueFactory(new PropertyValueFactory<>("Title"));
+                pk_c.setCellValueFactory(new PropertyValueFactory<>("Pk"));
+
+                ObservableList<ShortTable> tables = FXCollections.observableArrayList();
+
+                String [][] buffer = TableEditor.columnMap.get(TableEditor.tableId);
+                for(int i = 0; i < buffer.length; i++){
+                    tables.add(new ShortTable(buffer[i][0], buffer[i][2]));
+                }
+                tableViewShort.setItems(tables);
             }
         });
-
-
-
     }
 
     private void buildLinkHandlers(){
