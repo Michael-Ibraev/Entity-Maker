@@ -1,14 +1,18 @@
 package com.example.entitymaker;
 
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TableEditor {
+    public static Map<String, String> nameMap = new HashMap<String, String>();
+    public static Map<String, String[]> columnMap = new HashMap<String, String[]>();
+    public static String tableId;
     public static String tableName;
+    public static String Title;
+    public static String Type;
+    public static String PK;
+    public static String NN;
+    public static String AI;
 
 
 }

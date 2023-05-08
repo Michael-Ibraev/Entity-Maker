@@ -45,8 +45,8 @@ public class DraggableNode extends AnchorPane {
     private DragIconType mType = null;
 
     public TableView<ShortTable> tableViewShort;
-    public TableColumn<Table, String> title_c;
-    public TableColumn<Table, String> pk_c;
+    public TableColumn<ShortTable, String> title_c;
+    public TableColumn<ShortTable, String> pk_c;
 
     private Point2D mDragOffset = new Point2D(0.0, 0.0);
     @FXML ImageView reload_img;
@@ -57,6 +57,11 @@ public class DraggableNode extends AnchorPane {
     private final DraggableNode self;
     public DraggableNode(){
         setId(UUID.randomUUID().toString());
+        TableEditor.nameMap.put(getId(), "Table");
+
+        System.out.println(TableEditor.nameMap.keySet());
+        System.out.println(TableEditor.nameMap.values());
+
         self = this;
         FXMLLoader fxmlLoader = new FXMLLoader(
                 getClass().getResource("DraggableNode.fxml")
@@ -71,17 +76,18 @@ public class DraggableNode extends AnchorPane {
             throw  new RuntimeException(exception);
         }
 
+        title_c.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        pk_c.setCellValueFactory(new PropertyValueFactory<>("Pk"));
+
         ObservableList<ShortTable> tables = FXCollections.observableArrayList(
-                new ShortTable("test1", "pk"),
-                new ShortTable("test2", " "),
-                new ShortTable("test3", " ")
+                new ShortTable("test1", "pk1"),
+                new ShortTable("test2", "pk2"),
+                new ShortTable("test3", "pk3")
 
         );
-
         tableViewShort.setItems(tables);
 
-        title_c.setCellValueFactory(new PropertyValueFactory<>("Title"));
-        pk_c.setCellValueFactory(new PropertyValueFactory<>("PK"));
+
 
     }
     @FXML
@@ -230,13 +236,13 @@ public class DraggableNode extends AnchorPane {
         title_bar.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                TableEditor.tableName = title_bar.getText();
+                TableEditor.tableId = getId();
             }
         });
         reload_img.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                title_bar.setText(TableEditor.tableName);
+                title_bar.setText(TableEditor.nameMap.get(getId()));
             }
         });
 

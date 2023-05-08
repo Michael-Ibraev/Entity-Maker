@@ -154,6 +154,7 @@ public class RootLayout extends AnchorPane{
                         Point2D cursorPoint = container.getValue("scene_coords");
                         node.relocateToPoint(
                                 new Point2D(cursorPoint.getX() - 32, cursorPoint.getY() - 32)
+
                         );
                     }
                 }
@@ -194,13 +195,17 @@ public class RootLayout extends AnchorPane{
         refresh_button.setOnMouseClicked(new EventHandler <MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
-                table_name.setText(TableEditor.tableName);
+                table_name.setText(TableEditor.nameMap.get(TableEditor.tableId));
             }
         });
         submit_button.setOnMouseClicked(new EventHandler <MouseEvent>(){
             @Override
             public void handle(MouseEvent event) {
-                TableEditor.tableName = table_name.getText();
+                TableEditor.nameMap.put(TableEditor.tableId, table_name.getText());
+
+//                System.out.println(table_name.getText().toString());
+//                System.out.println(i);
+                //TableEditor.tableName = table_name.getText();
             }
         });
     }
