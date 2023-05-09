@@ -202,10 +202,6 @@ public class RootLayout extends AnchorPane{
             @Override
             public void handle(MouseEvent event) {
                 TableEditor.nameMap.put(TableEditor.tableId, table_name.getText());
-
-//                System.out.println(table_name.getText().toString());
-//                System.out.println(i);
-                //TableEditor.tableName = table_name.getText();
             }
         });
     }

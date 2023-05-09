@@ -19,6 +19,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -30,6 +31,7 @@ import java.util.UUID;
 public class DraggableNode extends AnchorPane {
 
     @FXML AnchorPane node_body;
+    @FXML GridPane gridPane;
 
     private final List mLinkIds = new ArrayList();
     private NodeLink mDragLink = null;
@@ -219,6 +221,8 @@ public class DraggableNode extends AnchorPane {
                     }
                     iterId.remove();
                 }
+                TableEditor.columnMap.remove(self.getId());
+                TableEditor.nameMap.remove(self.getId());
             }
         });
         title_bar.setOnMouseClicked(new EventHandler<MouseEvent>() {

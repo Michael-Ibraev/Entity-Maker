@@ -16,7 +16,7 @@
     <children>
         <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <GridPane alignment="TOP_CENTER" prefHeight="30.0" prefWidth="150.0" styleClass="node-overlay">
+                <GridPane fx:id="gridPane" alignment="TOP_CENTER" prefHeight="30.0" prefWidth="150.0" styleClass="node-overlay">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="99.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="34.0" minWidth="10.0" prefWidth="20.0" />
