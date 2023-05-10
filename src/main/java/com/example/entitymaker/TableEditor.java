@@ -13,6 +13,7 @@ public class TableEditor {
     public static String PK;
     public static String NN;
     public static String AI;
+    public static boolean linkColour = true;
 
 
 }

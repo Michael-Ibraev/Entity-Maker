@@ -6,9 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
@@ -19,6 +17,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class RootLayout extends AnchorPane{
@@ -60,7 +59,27 @@ public class RootLayout extends AnchorPane{
         addDragDetection(icn);
         icn.setType(DragIconType.values()[6]);
         left_pane.getChildren().add(icn);
+        /////////////////////////////////////////////
+        RadioButton n_n = new RadioButton("1 : 1");
+        RadioButton n_m = new RadioButton("1 : M");
 
+        n_n.setUserData(true);
+        n_m.setUserData(false);
+
+        left_pane.getChildren().add(n_n);
+        left_pane.getChildren().add(n_m);
+
+        ToggleGroup toggleGroup = new ToggleGroup();
+        n_n.setToggleGroup(toggleGroup);
+        n_m.setToggleGroup(toggleGroup);
+
+        n_n.setSelected(true);
+
+        toggleGroup.selectedToggleProperty().addListener(event -> {
+            TableEditor.linkColour = (boolean)toggleGroup.getSelectedToggle().getUserData();
+            System.out.println(TableEditor.linkColour);
+        });
+        /////////////////////////////////////////////
         buildDragHandlers();
         dataUpdate();
     }
@@ -166,7 +185,13 @@ public class RootLayout extends AnchorPane{
 
                     if (sourceId != null && targetId != null){
                         NodeLink link = new NodeLink();
-
+                        /////////////////////////////////////////
+                        if(TableEditor.linkColour){
+                            link.node_link.setStroke(Color.BLUE);
+                        } else {
+                            link.node_link.setStroke(Color.RED);
+                        }
+                        /////////////////////////////////////////
                         right_pane.getChildren().add(0, link);
 
                         DraggableNode source = null;
