@@ -51,7 +51,6 @@ public class RootLayout extends AnchorPane{
     @FXML
     private void initialize(){
         mDragOverIcon = new DragIcon();
-
         mDragOverIcon.setVisible(false);
         mDragOverIcon.setOpacity(0.65);
         getChildren().add(mDragOverIcon);

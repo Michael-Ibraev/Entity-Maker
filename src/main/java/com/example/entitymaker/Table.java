@@ -34,6 +34,17 @@ public class Table {
         this.pk = new CheckBox();
         this.nn = new CheckBox();
         this.ai = new CheckBox();
+        this.Title.set(title);
+        this.Type.getSelectionModel().select(type);
+        if(pk){
+            this.pk.setSelected(true);
+        }
+        if(nn){
+            this.nn.setSelected(true);
+        }
+        if(ai){
+            this.ai.setSelected(true);
+        }
     }
 
     public String getTitle() {

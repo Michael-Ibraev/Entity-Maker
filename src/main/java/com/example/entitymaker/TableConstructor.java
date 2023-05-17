@@ -30,6 +30,15 @@ public class TableConstructor implements Initializable{
 
         tableView.setEditable(true);
         title_column.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        ObservableList<Table> tables = FXCollections.observableArrayList();
+
+        String [][] buffer = TableEditor.columnMap.get(TableEditor.tableId);
+        if(buffer != null) {
+            for (int i = 0; i < buffer.length; i++) {
+                tableView.getItems().add(new Table(buffer[i][0], buffer[i][1], toBoolean(buffer[i][2]), toBoolean(buffer[i][3]), toBoolean(buffer[i][4])));
+            }
+        }
     }
 
 
@@ -102,5 +111,13 @@ public class TableConstructor implements Initializable{
             state = "";
         }
         return state;
+    }
+    public Boolean toBoolean(String key){
+        if(key.equals("PK") || key.equals("NN") || key.equals("AI")){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
