@@ -29,7 +29,6 @@ public class NodeLink  extends AnchorPane {
 
     public NodeLink(){
         setId(UUID.randomUUID().toString());
-
         FXMLLoader fxmlLoader = new FXMLLoader(
                 getClass().getResource("NodeLink.fxml")
         );

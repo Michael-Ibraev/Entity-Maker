@@ -14,6 +14,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Objects;
 
 import javafx.geometry.Point2D;
@@ -204,8 +205,23 @@ public class RootLayout extends AnchorPane{
                             if(n.getId().equals(targetId))
                                 target = (DraggableNode) n;
                         }
-                        if (source != null && target != null)
+                        if (source != null && target != null) {
                             link.bindEnds(source, target);
+                        }
+
+                        String colour;
+                        if(TableEditor.linkColour){
+                            colour = "1:1";
+                        }else {
+                            colour = "1:M";
+                        }
+
+                        TableEditor.linkMap.put(link.getId(), new String[]{sourceId, targetId, colour});
+                        System.out.println(TableEditor.linkMap.keySet());
+                        String[] arr = TableEditor.linkMap.get(link.getId());
+                        System.out.println(arr[0]);
+                        System.out.println(arr[1]);
+                        System.out.println(arr[2]);
                     }
 
                 }
