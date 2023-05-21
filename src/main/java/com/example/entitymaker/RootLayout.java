@@ -34,6 +34,8 @@ public class RootLayout extends AnchorPane{
     @FXML Button submit_button;
     @FXML TextField table_name;
     @FXML Button edit_button;
+    @FXML Button generateBtn;
+
     private DragIcon mDragOverIcon = null;
     public RootLayout(){
 
@@ -253,6 +255,13 @@ public class RootLayout extends AnchorPane{
         tableConstructor.setScene(new Scene(parent, 525, 450));
         tableConstructor.setResizable(false);
         tableConstructor.show();
+    }
+    public void toSqlGenerator() throws IOException {
+        Stage sqlGenerator = new Stage();
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("SQLGenerator.fxml")));
+        sqlGenerator.setScene(new Scene(parent, 500, 600));
+        sqlGenerator.setResizable(false);
+        sqlGenerator.show();
     }
 }
 

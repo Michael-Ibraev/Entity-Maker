@@ -33,6 +33,7 @@
                         <Button fx:id="submit_button" layoutX="172.0" layoutY="14.0" mnemonicParsing="false" text="Submit" />
                         <TextField fx:id="table_name" layoutX="14.0" layoutY="14.0" prefWidth="150.0" promptText="Table name" />
                         <Button fx:id="edit_button" layoutX="328.0" layoutY="14.0" mnemonicParsing="false" onAction="#toTableConstructor" text="Edit Table" />
+                        <Button fx:id="generateBtn" layoutX="14.0" layoutY="50.0" mnemonicParsing="false" onAction="#toSqlGenerator" text="Generate SQL-script" />
                      </children>
                 </AnchorPane>
               </content>

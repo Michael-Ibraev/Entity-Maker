@@ -69,18 +69,18 @@ public class TableConstructor implements Initializable{
             arrList.get(i).add(table.getTitle());
             arrList.get(i).add(table.getType().getValue().toString());
             arrList.get(i).add(getPkValue(table.getPk()));
-            arrList.get(i).add(getAiValue(table.getNn()));
-            arrList.get(i).add(getNnValue(table.getAi()));
+            arrList.get(i).add(getNnValue(table.getNn()));
+            arrList.get(i).add(getAiValue(table.getAi()));
 
         }
         String[][] arr = new String[arrList.size()][5];
 
         for(int i = 0; i < arrList.size(); i++){
             for(int j = 0; j < arrList.get(i).size(); j++){
-                System.out.println(arrList.get(i).get(j));
+               // System.out.println(arrList.get(i).get(j));
                 arr[i][j] = arrList.get(i).get(j);
             }
-            System.out.println("-----------------------");
+          //  System.out.println("-----------------------");
         }
         TableEditor.columnMap.put(TableEditor.tableId, arr);
     }
