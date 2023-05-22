@@ -7,6 +7,7 @@ import java.util.*;
 
 public class SQLGenerator implements Initializable {
     String script = "";
+    String alterScript = "";
     public static Map<String, String[][]> tables = new HashMap<String, String[][]>();
 
     @Override
@@ -52,6 +53,19 @@ ENGINE = InnoDB;
                 }
             }
         }
+
+        for(int i = 0; i < tables.size(); i++){
+            String[][] value = tables.get(tablesKeys[i]);
+            for(int k = 0; k < value.length; k++){
+                for(int j = 0; j < 5; j++ ){
+                    if(value[k][j].equals("PK")){
+                        alterScript += "ALTER TABLE `" +  tablesKeys[i] +"` ADD PRIMARY KEY ("+value[k][0]+");\n";
+                    }
+                }
+            }
+        }
         System.out.println(script);
+        System.out.println(alterScript);
+
     }
 }
