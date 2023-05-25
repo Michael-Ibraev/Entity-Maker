@@ -1,6 +1,7 @@
 module com.example.entitymaker {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens com.example.entitymaker to javafx.fxml;

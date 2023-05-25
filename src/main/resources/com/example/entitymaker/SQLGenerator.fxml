@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.entitymaker.SQLGenerator">
-
+<AnchorPane prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.entitymaker.SQLGenerator">
+   <children>
+      <TextArea fx:id="textArea" layoutX="25.0" layoutY="174.0" prefHeight="500.0" prefWidth="550.0" />
+      <Label layoutX="25.0" layoutY="14.0" maxWidth="550.0" prefHeight="65.0" prefWidth="550.0" text="This script will now be executed on the DB server to create your database. You may make changes before executing." wrapText="true">
+         <font>
+            <Font name="Carlito Bold" size="17.0" />
+         </font>
+      </Label>
+      <TextField fx:id="jdbcField" layoutX="25.0" layoutY="87.0" prefHeight="24.0" prefWidth="330.0" promptText="JDBC Connection String" />
+      <TextField fx:id="usernameField" layoutX="384.0" layoutY="87.0" prefHeight="24.0" prefWidth="180.0" promptText="Username" />
+      <PasswordField fx:id="passField" layoutX="25.0" layoutY="123.0" prefHeight="24.0" prefWidth="180.0" promptText="Password" />
+      <Button fx:id="submitBtn" layoutX="499.0" layoutY="123.0" mnemonicParsing="false" onAction="#pushScript" text="Submit" />
+   </children>
 </AnchorPane>

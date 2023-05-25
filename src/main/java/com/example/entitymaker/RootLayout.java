@@ -259,7 +259,7 @@ public class RootLayout extends AnchorPane{
     public void toSqlGenerator() throws IOException {
         Stage sqlGenerator = new Stage();
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("SQLGenerator.fxml")));
-        sqlGenerator.setScene(new Scene(parent, 500, 600));
+        sqlGenerator.setScene(new Scene(parent, 600, 700));
         sqlGenerator.setResizable(false);
         sqlGenerator.show();
     }
