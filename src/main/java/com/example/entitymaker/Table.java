@@ -16,7 +16,7 @@ public class Table {
     public Table(){
         Title = new SimpleStringProperty();
         Type = new ComboBox();
-        ObservableList<String> types = FXCollections.observableArrayList("---","int", "varchar()", "decimal()", "date");
+        ObservableList<String> types = FXCollections.observableArrayList("---","INT", "VARCHAR()", "DECIMAL()", "TEXT", "REAL");
         Type.setItems(types);
         Type.getSelectionModel().selectFirst();
         Type.setEditable(true);
@@ -27,7 +27,7 @@ public class Table {
     public Table(String title, String type, Boolean pk, Boolean nn, Boolean ai) {
         Title = new SimpleStringProperty();
         Type = new ComboBox();
-        ObservableList<String> types = FXCollections.observableArrayList("---","int", "varchar", "decimal", "date");
+        ObservableList<String> types = FXCollections.observableArrayList("---","INT", "VARCHAR()", "DECIMAL()", "TEXT", "REAL");
         Type.setItems(types);
         Type.getSelectionModel().selectFirst();
         Type.setEditable(true);

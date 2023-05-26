@@ -40,8 +40,6 @@ public class TableConstructor implements Initializable{
             }
         }
     }
-
-
     public void addRow(ActionEvent actionEvent) {
         tableView.getItems().add(new Table());
     }

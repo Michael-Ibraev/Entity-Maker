@@ -96,11 +96,11 @@ public class SQLGenerator implements Initializable {
                         targetColumn + ");\n\n";
             } else if(value[2].equals("1:1")){
                 linkScript += "ALTER TABLE `" + value[0] + "` ADD COLUMN " + value[1] + "_" + targetColumn + " " +
-                        targetColumnType + " NOT NULL;\n\n" +
+                        targetColumnType + " UNIQUE NOT NULL;\n\n" +
 
                         "ALTER TABLE `" + value[0] + "` ADD CONSTRAINT " + "fk_" + value[0] + "_" + value[1] +
                         "\nFOREIGN KEY (" + value[1] + "_" + targetColumn + ") REFERENCES `" + value[1] + "` (" +
-                        targetColumn + "),\n ADD UNIQUE("+value[1] + "_" + targetColumn+");\n\n";
+                        targetColumn + ");\n\n";
             }
         }
         textArea.setText(script + alterScript + linkScript);
