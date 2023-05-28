@@ -35,6 +35,7 @@ public class RootLayout extends AnchorPane{
     @FXML TextField table_name;
     @FXML Button edit_button;
     @FXML Button generateBtn;
+    @FXML Button generateSQLiteBtn;
 
     private DragIcon mDragOverIcon = null;
     public RootLayout(){
@@ -258,7 +259,14 @@ public class RootLayout extends AnchorPane{
     }
     public void toSqlGenerator() throws IOException {
         Stage sqlGenerator = new Stage();
-        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("SQLGenerator.fxml")));
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MySQLGenerator.fxml")));
+        sqlGenerator.setScene(new Scene(parent, 600, 700));
+        sqlGenerator.setResizable(false);
+        sqlGenerator.show();
+    }
+    public void toSQLiteGenerator() throws IOException {
+        Stage sqlGenerator = new Stage();
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("SQLiteGenerator.fxml")));
         sqlGenerator.setScene(new Scene(parent, 600, 700));
         sqlGenerator.setResizable(false);
         sqlGenerator.show();
