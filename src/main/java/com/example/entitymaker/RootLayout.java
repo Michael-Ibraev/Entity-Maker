@@ -36,6 +36,7 @@ public class RootLayout extends AnchorPane{
     @FXML Button edit_button;
     @FXML Button generateBtn;
     @FXML Button generateSQLiteBtn;
+    @FXML Button entityGeneratorBtn;
 
     private DragIcon mDragOverIcon = null;
     public RootLayout(){
@@ -62,7 +63,7 @@ public class RootLayout extends AnchorPane{
         addDragDetection(icn);
         icn.setType(DragIconType.values()[6]);
         left_pane.getChildren().add(icn);
-        /////////////////////////////////////////////
+
         RadioButton n_n = new RadioButton("1 : 1");
         RadioButton n_m = new RadioButton("1 : M");
 
@@ -82,7 +83,6 @@ public class RootLayout extends AnchorPane{
             TableEditor.linkColour = (boolean)toggleGroup.getSelectedToggle().getUserData();
             System.out.println(TableEditor.linkColour);
         });
-        /////////////////////////////////////////////
         buildDragHandlers();
         dataUpdate();
     }
@@ -268,6 +268,13 @@ public class RootLayout extends AnchorPane{
         Stage sqlGenerator = new Stage();
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("SQLiteGenerator.fxml")));
         sqlGenerator.setScene(new Scene(parent, 600, 700));
+        sqlGenerator.setResizable(false);
+        sqlGenerator.show();
+    }
+    public void toEntityGenerator() throws IOException {
+        Stage sqlGenerator = new Stage();
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("EntityGenerator.fxml")));
+        sqlGenerator.setScene(new Scene(parent, 600, 400));
         sqlGenerator.setResizable(false);
         sqlGenerator.show();
     }
