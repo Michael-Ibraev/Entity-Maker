@@ -69,17 +69,9 @@ public class MySQLGenerator implements Initializable {
 
         for(int i = 0; i < links.size(); i++){
             String[] value = links.get(linkKeys[i]);
-            String sourceColumn = "";
             String targetColumn = "";
             String targetColumnType = "";
-            String[][] sourceTable = tables.get(value[0]);
             String[][] targetTable = tables.get(value[1]);
-
-            for(int k = 0; k < sourceTable.length; k ++){
-                if(sourceTable[k][2].equals("PK")){
-                    sourceColumn = sourceTable[k][0];
-                }
-            }
 
             for(int k = 0; k < targetTable.length; k ++){
                 if(targetTable[k][2].equals("PK")){
