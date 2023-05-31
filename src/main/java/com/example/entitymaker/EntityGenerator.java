@@ -30,9 +30,6 @@ public class EntityGenerator implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        directoryChooser.setInitialDirectory(new File("/home/"));
-        textField.setText(directoryChooser.getInitialDirectory().toString()+"/");
-
         String[] nameKeys = TableEditor.nameMap.keySet().toArray(new String[0]);
 
         for(int i = 0; i < TableEditor.nameMap.size(); i++){
