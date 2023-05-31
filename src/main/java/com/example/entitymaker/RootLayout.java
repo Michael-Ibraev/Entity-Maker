@@ -1,25 +1,37 @@
 package com.example.entitymaker;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.pdf.PdfWriter;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.*;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Objects;
-
-import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import javax.imageio.ImageIO;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Objects;
 
 public class RootLayout extends AnchorPane{
     private EventHandler mIconDragOverRoot = null;
@@ -37,6 +49,7 @@ public class RootLayout extends AnchorPane{
     @FXML Button generateBtn;
     @FXML Button generateSQLiteBtn;
     @FXML Button entityGeneratorBtn;
+    @FXML Button pdfBtn;
 
     private DragIcon mDragOverIcon = null;
     public RootLayout(){
@@ -277,6 +290,23 @@ public class RootLayout extends AnchorPane{
         sqlGenerator.setScene(new Scene(parent, 600, 400));
         sqlGenerator.setResizable(false);
         sqlGenerator.show();
+    }
+
+    public void exportToPdf() throws IOException, DocumentException {
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showSaveDialog(new Stage());
+
+        ByteArrayOutputStream byteOutput = new ByteArrayOutputStream();
+
+        WritableImage image = right_pane.snapshot(new SnapshotParameters(), null);
+        ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", byteOutput);
+
+        Document document = new Document(PageSize.B2.rotate());
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(selectedFile));
+        Image img = Image.getInstance(byteOutput.toByteArray());
+        document.open();
+        document.add(img);
+        document.close();
     }
 }
 

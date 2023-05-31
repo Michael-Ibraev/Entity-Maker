@@ -38,6 +38,7 @@
                         <Button fx:id="generateSQLiteBtn" layoutX="15.0" layoutY="100.0" mnemonicParsing="false" onAction="#toSQLiteGenerator" prefHeight="24.0" prefWidth="175.0" text="Generate SQLite-script" />
                         <Separator fx:id="separator" layoutY="49.0" minWidth="-Infinity" prefHeight="0.0" prefWidth="1920.0" />
                         <Button fx:id="entityGeneratorBtn" layoutX="14.0" layoutY="136.0" mnemonicParsing="false" onAction="#toEntityGenerator" prefWidth="175.0" text="Generate Entity-classes" />
+                        <Button fx:id="pdfBtn" layoutX="205.0" layoutY="62.0" mnemonicParsing="false" onAction="#exportToPdf" text="Export to PDF" />
                      </children>
                 </AnchorPane>
               </content>
