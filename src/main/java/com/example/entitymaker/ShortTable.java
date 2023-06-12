@@ -5,11 +5,13 @@ import javafx.beans.property.SimpleStringProperty;
 public class ShortTable {
     public SimpleStringProperty Title;
     public SimpleStringProperty Pk;
-
+    // Конструктор класса
     public ShortTable(String title, String pk) {
         Title = new SimpleStringProperty(title);
         Pk = new SimpleStringProperty(pk);
     }
+
+    // Геттеры и сеттеры полей таблицы
     public String getTitle() {
         return Title.get();
     }

@@ -20,6 +20,7 @@ public class TableConstructor implements Initializable{
     public TableColumn<Table, Boolean> pk_column;
     public TableColumn<Table, Boolean> nn_column;
     public TableColumn<Table, Boolean> ai_column;
+    // Метод инициализации
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         title_column.setCellValueFactory(new PropertyValueFactory<>("Title"));
@@ -40,22 +41,23 @@ public class TableConstructor implements Initializable{
             }
         }
     }
+    //Метод добавления новой строки в таблицу
     public void addRow(ActionEvent actionEvent) {
         tableView.getItems().add(new Table());
     }
-
+    //Метод удаления строки из таблицы
     public void deleteRow(ActionEvent actionEvent) {
         ObservableList<Table> allColumns, singleColumn;
         allColumns = tableView.getItems();
         singleColumn = tableView.getSelectionModel().getSelectedItems();
         singleColumn.forEach(allColumns::remove);
     }
-
+    // Метод позволяющий редактировать выделенную ячейку таблицы
     public void onTitleEdit(TableColumn.CellEditEvent<Table, String> tableStringCellEditEvent) {
         Table table = tableView.getSelectionModel().getSelectedItem();
         table.setTitle(tableStringCellEditEvent.getNewValue());
     }
-
+    // Метод сохранения данных из таблицы в словарь данных
     public void save(){
         Table table =  new Table();
 
@@ -75,14 +77,12 @@ public class TableConstructor implements Initializable{
 
         for(int i = 0; i < arrList.size(); i++){
             for(int j = 0; j < arrList.get(i).size(); j++){
-               // System.out.println(arrList.get(i).get(j));
                 arr[i][j] = arrList.get(i).get(j);
             }
-          //  System.out.println("-----------------------");
         }
         TableEditor.columnMap.put(TableEditor.tableId, arr);
     }
-
+    // Методы получения значений столбцов pk, nn, ai
     public String getPkValue(CheckBox checkBox){
         String state;
         if(checkBox.isSelected()){

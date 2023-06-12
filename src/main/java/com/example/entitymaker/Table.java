@@ -13,6 +13,7 @@ public class Table {
     private CheckBox nn;
     private CheckBox ai;
 
+    // Конструктор класса
     public Table(){
         Title = new SimpleStringProperty();
         Type = new ComboBox();
@@ -24,6 +25,8 @@ public class Table {
         this.nn = new CheckBox();
         this.ai = new CheckBox();
     }
+
+    // Конструктор класса
     public Table(String title, String type, Boolean pk, Boolean nn, Boolean ai) {
         Title = new SimpleStringProperty();
         Type = new ComboBox();
@@ -46,7 +49,7 @@ public class Table {
             this.ai.setSelected(true);
         }
     }
-
+    // Геттеры и сеттеры для атрибутов таблиц
     public String getTitle() {
         return Title.get();
     }

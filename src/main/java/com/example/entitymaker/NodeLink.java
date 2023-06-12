@@ -1,6 +1,5 @@
 package com.example.entitymaker;
 
-import javafx.beans.binding.Binding;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.When;
 import javafx.beans.property.DoubleProperty;
@@ -26,7 +25,7 @@ public class NodeLink  extends AnchorPane {
     private final DoubleProperty mControlDirectionY2 = new SimpleDoubleProperty();
 
 
-
+    // Конструктор класса
     public NodeLink(){
         setId(UUID.randomUUID().toString());
         FXMLLoader fxmlLoader = new FXMLLoader(
@@ -41,7 +40,7 @@ public class NodeLink  extends AnchorPane {
             throw new RuntimeException();
         }
     }
-
+    // Метод инициализации
     @FXML
     private void initialize(){
         mControlOffsetX.set(100.0);
@@ -74,17 +73,19 @@ public class NodeLink  extends AnchorPane {
                         mControlOffsetY.multiply(mControlDirectionY2))
         );
     }
-
+    // Метод установки начальных координат связи
     public void setStart(Point2D startPoint){
         node_link.setStartX(startPoint.getX());
         node_link.setStartY(startPoint.getY());
     }
 
+    // Метод установки конечных координат связи
     public void setEnd(Point2D endPoint){
         node_link.setEndX(endPoint.getX());
         node_link.setEndY(endPoint.getY());
     }
 
+    // Метод привязывающий начальную и конечную точки связи к центрам начального DraggableNode и конечного
     public void bindEnds(DraggableNode source, DraggableNode target){
         node_link.startXProperty().bind(
                 Bindings.add(source.layoutXProperty(), (source.getWidth() / 2.0)));
@@ -94,7 +95,6 @@ public class NodeLink  extends AnchorPane {
                 Bindings.add(target.layoutXProperty(), (target.getWidth() / 2.0)));
         node_link.endYProperty().bind(
                 Bindings.add(target.layoutYProperty(), (target.getWidth() / 2.0)));
-
         source.registerLink(getId());
         target.registerLink(getId());
     }

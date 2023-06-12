@@ -27,7 +27,7 @@ public class EntityGenerator implements Initializable {
     public static Map<String, String[]> links = new HashMap<String, String[]>();
     String[] tablesKeys;
     String[] linkKeys;
-
+    // Метод инициализации
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         String[] nameKeys = TableEditor.nameMap.keySet().toArray(new String[0]);
@@ -51,12 +51,13 @@ public class EntityGenerator implements Initializable {
 
 
     }
+    // Обработчик кнопки выбора директории для сохоанения файлов
     @FXML
     public void setBrowseBtn(){
         selectedDirectory = directoryChooser.showDialog(new Stage());
         textField.setText(selectedDirectory.getAbsolutePath()+"/");
     }
-
+    // Создания и заполнение фалйов
     public void entityGenerate(ActionEvent actionEvent) throws IOException {
         for(int i = 0; i < tables.size(); i++) {
             fileName = tablesKeys[i];
@@ -107,6 +108,7 @@ public class EntityGenerator implements Initializable {
                         columnName.toLowerCase() + ") {\n" +
                         "\t\tthis." + columnName + " = " + columnName.toLowerCase() + ";\n\t}");
             }
+            // Добавление данных о связях
             for (int j = 0; j < links.size(); j++) {
                 String[] linkValue = links.get(linkKeys[j]);
                 String[][] targetTable = tables.get(linkValue[1]);

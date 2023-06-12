@@ -25,6 +25,8 @@ public class DragIcon extends AnchorPane {
     }
     @FXML
     private  void initialize(){}
+
+    // Метод перемещения иконки таблицы в боковом меню
     public void relocateToPoint(Point2D p){
         Point2D localCoords = getParent().sceneToLocal(p);
         relocate(
@@ -34,7 +36,12 @@ public class DragIcon extends AnchorPane {
         );
     }
 
-    public DragIconType getType(){ return mType;}
+    // Метод возвращающий тип иконки
+    public DragIconType getType(){
+        return mType;
+    }
+
+    // Метод присваивания типа иконок
     public void setType(DragIconType type){
         mType = type;
 

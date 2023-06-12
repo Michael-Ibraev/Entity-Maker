@@ -4,7 +4,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +19,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -57,6 +55,7 @@ public class DraggableNode extends AnchorPane {
     @FXML public TextField table_name;
     @FXML public Button submit_button;
     private final DraggableNode self;
+    // Конструктор класса
     public DraggableNode(){
         setId(UUID.randomUUID().toString());
         TableEditor.nameMap.put(getId(), "Table");
@@ -79,7 +78,7 @@ public class DraggableNode extends AnchorPane {
             throw  new RuntimeException(exception);
         }
     }
-
+    // Метод инициализации
     @FXML
     private void initialize(){
         root_pane.isResizable();
@@ -107,6 +106,7 @@ public class DraggableNode extends AnchorPane {
         reload_img.setImage(new Image("reload.png"));
 
     }
+    // Метод перемещения объекта в области создания модели базы данных
     public void relocateToPoint(Point2D p){
         Point2D localCoords = getParent().sceneToLocal(p);
         relocate(
@@ -115,7 +115,10 @@ public class DraggableNode extends AnchorPane {
         );
     }
 
-    public DragIconType getType(){ return mType;}
+    public DragIconType getType(){
+        return mType;
+    }
+    // Метод выбора цвета иконки таблицы
     public void setType(DragIconType type){
         mType = type;
 
@@ -155,6 +158,7 @@ public class DraggableNode extends AnchorPane {
                 break;
         }
     }
+    //Метод обнаружения события перетаскивания объекта
     public void buildNodeDragHandlers(){
         title_bar.setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
@@ -249,7 +253,7 @@ public class DraggableNode extends AnchorPane {
             }
         });
     }
-
+    // Метод добавления связей между таблицами
     private void buildLinkHandlers(){
         mLinkHandlerDragDetected = new EventHandler<MouseEvent>() {
             @Override
@@ -271,20 +275,16 @@ public class DraggableNode extends AnchorPane {
 
                 mDragLink.setStart(p);
 
-                /* *** */
                 ClipboardContent content = new ClipboardContent();
                 DragContainer container = new DragContainer();
-
-//                AnchorPane link_handle = (AnchorPane) event.getSource();
-//                DraggableNode parent = (DraggableNode) link_handle.getParent().getParent().getParent();
 
                 container.addData("source", getId());
 
                 content.put(DragContainer.AddLink, container);
 
-                /*parent.*/startDragAndDrop(TransferMode.ANY).setContent(content);
+                startDragAndDrop(TransferMode.ANY).setContent(content);
                 event.consume();
-                /* *** */
+
             }
         };
 

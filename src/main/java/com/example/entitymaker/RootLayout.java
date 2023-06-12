@@ -66,6 +66,7 @@ public class RootLayout extends AnchorPane{
         }
     }
 
+    // Метод инициализации
     @FXML
     private void initialize(){
         mDragOverIcon = new DragIcon();
@@ -100,6 +101,7 @@ public class RootLayout extends AnchorPane{
         dataUpdate();
     }
 
+    // Метод обнаружения перетаскивания объекта
     private void addDragDetection(DragIcon dragIcon){
         dragIcon.setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
@@ -126,6 +128,7 @@ public class RootLayout extends AnchorPane{
             }
         });
     }
+    // Метод для создания многократно используемых объектов EventHandler
     private void buildDragHandlers(){
         mIconDragOverRoot = new EventHandler <DragEvent>(){
             @Override
@@ -201,13 +204,11 @@ public class RootLayout extends AnchorPane{
 
                     if (sourceId != null && targetId != null){
                         NodeLink link = new NodeLink();
-                        /////////////////////////////////////////
                         if(TableEditor.linkColour){
                             link.node_link.setStroke(Color.BLUE);
                         } else {
                             link.node_link.setStroke(Color.RED);
                         }
-                        /////////////////////////////////////////
                         right_pane.getChildren().add(0, link);
 
                         DraggableNode source = null;
@@ -231,7 +232,6 @@ public class RootLayout extends AnchorPane{
                         }else {
                             colour = "1:M";
                         }
-
                         TableEditor.linkMap.put(link.getId(), new String[]{sourceId, targetId, colour});
                         System.out.println(TableEditor.linkMap.keySet());
                         String[] arr = TableEditor.linkMap.get(link.getId());
@@ -246,7 +246,7 @@ public class RootLayout extends AnchorPane{
         });
     }
 
-
+    // Метод обновления названия таблиц и названия столюцов таблицы
     public void dataUpdate(){
         refresh_button.setOnMouseClicked(new EventHandler <MouseEvent>(){
             @Override
@@ -262,6 +262,7 @@ public class RootLayout extends AnchorPane{
         });
     }
 
+    // Метод перехода на форму редактирования столбцов и атрибутов таблицы
     public void toTableConstructor() throws IOException {
         Stage tableConstructor = new Stage();
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("tableConstructor.fxml")));
@@ -270,6 +271,8 @@ public class RootLayout extends AnchorPane{
         tableConstructor.setResizable(false);
         tableConstructor.show();
     }
+    // Метод перехода на форму генерации MySQL-скрипта
+
     public void toSqlGenerator() throws IOException {
         Stage sqlGenerator = new Stage();
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MySQLGenerator.fxml")));
@@ -277,6 +280,7 @@ public class RootLayout extends AnchorPane{
         sqlGenerator.setResizable(false);
         sqlGenerator.show();
     }
+    // Метод перехода на форму генерации SQLite-cкрипта
     public void toSQLiteGenerator() throws IOException {
         Stage sqlGenerator = new Stage();
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("SQLiteGenerator.fxml")));
@@ -284,6 +288,7 @@ public class RootLayout extends AnchorPane{
         sqlGenerator.setResizable(false);
         sqlGenerator.show();
     }
+    // Метод перехода на форму создания классов-сущностей Java-проекта
     public void toEntityGenerator() throws IOException {
         Stage sqlGenerator = new Stage();
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("EntityGenerator.fxml")));
@@ -291,7 +296,7 @@ public class RootLayout extends AnchorPane{
         sqlGenerator.setResizable(false);
         sqlGenerator.show();
     }
-
+    // Метод экспорта построенной модели в PDF
     public void exportToPdf() throws IOException, DocumentException {
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showSaveDialog(new Stage());

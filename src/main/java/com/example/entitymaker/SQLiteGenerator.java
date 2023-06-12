@@ -26,6 +26,7 @@ public class SQLiteGenerator  implements Initializable {
     public static Map<String, String[][]> tables = new HashMap<String, String[][]>();
     public static Map<String, String[]> links = new HashMap<String, String[]>();
 
+    // Метод инициализации
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         jdbcField.setText("jdbc:sqlite:/home/mibraev/tt.db");
@@ -45,7 +46,7 @@ public class SQLiteGenerator  implements Initializable {
         }
 
         String[] tablesKeys = tables.keySet().toArray(new String[0]);
-
+        // Генерация SQLite-скрипта на создание таблиц, их столбцов и атрибутов
         for(int i = 0; i < tables.size(); i++){
             script += "CREATE TABLE IF NOT EXISTS `" +  tablesKeys[i] +"`(\n";
             String[][] value = tables.get(tablesKeys[i]);
@@ -75,6 +76,7 @@ public class SQLiteGenerator  implements Initializable {
             }
         }
 
+        // Генерация SQLite-скрипта на создание связей между таблицами
         for(int i = 0; i < links.size(); i++){
             String[] value = links.get(linkKeys[i]);
             String targetColumn = "";
@@ -106,7 +108,7 @@ public class SQLiteGenerator  implements Initializable {
         }
         textArea.setText(script + alterScript + linkScript);
     }
-
+    // Метод подключения к базе данных и выполнения ранее созданных скриптов
     public void pushScript() throws SQLException {
         String[] script = textArea.getText().split(";");
         Connection connection = null;
